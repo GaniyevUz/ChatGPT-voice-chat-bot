@@ -2,13 +2,12 @@ import re
 
 import openai
 
-openai.api_key = 'api_key'
+openai.api_key = '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'
 roles = {
     'girlfriend': "You are this user's girlfriend. You should be some funny and act like human",
     'friend': 'You are this user\'s friend. You should be some funny and act like human',
     'listener': 'You are this user\'s listener. You should listen to the user and '
                 'respond with some advice give some motivation and be some funny',
-    'paraphrase': 'Paraphrase following user\'s text.',
 }
 
 

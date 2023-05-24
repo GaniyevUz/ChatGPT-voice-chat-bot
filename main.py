@@ -2,11 +2,13 @@ import os
 from gtts import gTTS
 from playsound import playsound
 
+from config.database import engine
 from config.models import ChatHistory
 from helpers import ask_chatgpt, recognize
+from helpers.tts import tts
+from test import speech
 
 if __name__ == '__main__':
-    # Base.metadata.create_all(engine)
     print("""Welcome to the chatbot! 
           Available roles:
           1. Friend - A friend who can chat with you like best friends
@@ -33,13 +35,9 @@ if __name__ == '__main__':
             old_messages = ChatHistory.get_old_messages(role, 5)
             print('Input:', text)
             gpt = ask_chatgpt(text, role, old_messages)
-            output = gTTS(text=gpt, lang=lang)
-            output.save(file)
+            tts(gpt, role)
             print('Output:', gpt)
             ChatHistory.create(text, gpt, role)
-            playsound(file)
-            if os.path.exists(file):
-                os.remove(file)
     except AssertionError as e:
         print('Error:', e)
     except KeyboardInterrupt:

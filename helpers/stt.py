@@ -13,9 +13,10 @@ def recognize(duration=3, lang='en'):
             print("Ask Something...")
             # read the audio data from the default microphone
             audio_data = r.record(source, duration=duration)
+            # audio_data = r.listen(source, phrase_time_limit=3)
             print("Recognizing...")
             # convert speech to text
-            text = r.recognize_google(audio_data, language=lang)
+            text = r.recognize_google(audio_data)
             return True, text
         except sr.UnknownValueError:
             return False, choice(errors)
